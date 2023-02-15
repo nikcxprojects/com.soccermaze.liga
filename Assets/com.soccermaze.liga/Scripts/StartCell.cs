@@ -18,6 +18,6 @@ public class StartCell : MonoBehaviour
         }
 
         IsStarted = true;
-        Debug.Log("start game");
+        FindObjectOfType<BallAI>().StartTravelling();
     }
 }

@@ -13,7 +13,7 @@ GameObject:
   - component: {fileID: 171165463007824425}
   - component: {fileID: 171165463007824424}
   - component: {fileID: 171165463007824427}
-  m_Layer: 0
+  m_Layer: 2
   m_Name: ball ai
   m_TagString: Untagged
   m_Icon: {fileID: 0}
