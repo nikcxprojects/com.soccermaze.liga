@@ -73,7 +73,7 @@ public class GameManager : MonoBehaviour
 
     public void SetPause(bool IsPause)
     {
-        GamePaused = true;
+        GamePaused = IsPause;
         pause.SetActive(IsPause);
     }
 
