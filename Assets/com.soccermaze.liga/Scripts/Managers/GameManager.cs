@@ -22,7 +22,8 @@ public class GameManager : MonoBehaviour
     [SerializeField] GameObject lose;
 
     [Space(10)]
-    [SerializeField] GameObject rotateBtn;
+    [SerializeField] RotateBtn rotateBtn;
+    [SerializeField] DeleteBtn deleteBtn;
 
     private void Start()
     {
@@ -74,7 +75,8 @@ public class GameManager : MonoBehaviour
     public void SetWorldElement(GameObject _worldElementRef)
     {
         worldElementRef = _worldElementRef;
-        rotateBtn.SetActive(true);
+        rotateBtn.SetActive = true;
+        deleteBtn.SetActive = true;
     }
 
     public void RotateWorldElement()
@@ -86,4 +88,16 @@ public class GameManager : MonoBehaviour
 
         worldElementRef.transform.Rotate(0, 0, 90);
     }
+
+    public void DeleteWorldElement()
+    {
+        if(worldElementRef)
+        {
+            return;
+        }
+
+        Destroy(worldElementRef);
+    }
+
+    public void ClearWorldElementRef() => worldElementRef = null;
 }
