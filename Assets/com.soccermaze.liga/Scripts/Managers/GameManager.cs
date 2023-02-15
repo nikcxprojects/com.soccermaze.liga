@@ -48,10 +48,19 @@ public class GameManager : MonoBehaviour
     {
         background.SetActive(false);
 
+        win.SetActive(false);
+        lose.SetActive(false);
         menu.SetActive(false);
+
         game.SetActive(true);
 
+        if(LevelRef)
+        {
+            Destroy(LevelRef);
+        }
+
         LevelRef = Instantiate(Resources.Load<GameObject>("level"), GameObject.Find("Environment").transform);
+        Elements.IsActive = true;
     }
 
     public void OpenMenu()
@@ -65,6 +74,8 @@ public class GameManager : MonoBehaviour
 
         background.SetActive(true);
 
+        win.SetActive(false);
+        lose.SetActive(false);
         game.SetActive(false);
         pause.SetActive(false);
 
@@ -92,6 +103,24 @@ public class GameManager : MonoBehaviour
         }
 
         worldElementRef.transform.Rotate(0, 0, 90);
+    }
+
+    public void DisableControlls()
+    {
+        rotateBtn.SetActive = false;
+        deleteBtn.SetActive = false;
+    }
+
+    public void CheckResult(bool IsWin)
+    {
+        if(IsWin)
+        {
+            win.SetActive(true);
+        }
+        else
+        {
+            lose.SetActive(true);
+        }
     }
 
     public void DeleteWorldElement()

@@ -20,6 +20,9 @@ public class StartCell : MonoBehaviour
         IsStarted = true;
         gameObject.layer = 2;
 
+        Elements.IsActive = false;
+        GameManager.Instance.DisableControlls();
+
         FindObjectOfType<BallAI>().StartTravelling();
     }
 }
