@@ -40,7 +40,10 @@ public class BallAI : MonoBehaviour
     }
 
     private IEnumerator Travelling()
-    { 
+    {
+        float et = 0.0f;
+        float waitTime = 2.5f;
+
         while(true)
         {
             if (GameManager.GamePaused)
@@ -64,6 +67,8 @@ public class BallAI : MonoBehaviour
                     {
                         hit.collider.gameObject.layer = 2;
                         Target = hit.transform.position;
+
+                        et = 0.0f;
                         find = true;
                     }
                 }
@@ -71,6 +76,16 @@ public class BallAI : MonoBehaviour
                 if (find)
                 {
                     break;
+                }
+            }
+
+            if (!find && !GameManager.GamePaused)
+            {
+                et += Time.deltaTime;
+                if (et >= waitTime)
+                {
+                    GameManager.Instance.CheckResult(false);
+                    yield break;
                 }
             }
 
