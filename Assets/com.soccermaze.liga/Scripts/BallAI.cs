@@ -34,9 +34,12 @@ public class BallAI : MonoBehaviour
             if (hit.collider != null)
             {
                 Target = hit.transform.position;
-                //hit.collider.enabled = false;
 
-                Debug.Log(hit.collider.name);
+                if (hit.collider.isTrigger)
+                {
+                    hit.collider.enabled = false;
+                    Debug.Log(hit.collider.name);
+                }
             }
         }
 
