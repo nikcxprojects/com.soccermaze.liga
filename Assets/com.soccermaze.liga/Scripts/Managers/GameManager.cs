@@ -8,6 +8,11 @@ public class GameManager : MonoBehaviour
     [SerializeField] GameObject leaders;
     [SerializeField] GameObject settings;
 
+    private void Start()
+    {
+        menu.SetActive(true);
+    }
+
     public void OpenLeaders(bool IsOpen)
     {
         menu.SetActive(!IsOpen);
