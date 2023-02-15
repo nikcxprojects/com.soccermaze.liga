@@ -14,7 +14,7 @@ public class Level : MonoBehaviour
     private GameObject elementRef;
 
     [Space(10)]
-    [SerializeField] GameObject ballAi;
+    [SerializeField] BallAI ballAi;
 
     private List<Transform> emptyCells;
     [SerializeField] Transform cells;
@@ -47,7 +47,7 @@ public class Level : MonoBehaviour
         startCell.gameObject.AddComponent<StartCell>();
         startCell.GetComponent<SpriteRenderer>().sprite = startSprite;
 
-        ballAi.transform.position = startCell.position;
+        ballAi.SetBallPosition(startCell.position);
 
         transform.position += Vector3.down * 15.0f;
     }

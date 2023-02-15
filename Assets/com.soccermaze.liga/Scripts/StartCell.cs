@@ -18,6 +18,8 @@ public class StartCell : MonoBehaviour
         }
 
         IsStarted = true;
+        gameObject.layer = 2;
+
         FindObjectOfType<BallAI>().StartTravelling();
     }
 }
