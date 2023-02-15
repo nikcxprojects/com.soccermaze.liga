@@ -5,6 +5,8 @@ public class GameManager : MonoBehaviour
 {
     public static GameManager Instance { get => FindObjectOfType<GameManager>(); }
 
+    public static bool GamePaused { get; set; }
+
     private GameObject LevelRef { get; set; }
     private GameObject worldElementRef;
 
@@ -54,6 +56,8 @@ public class GameManager : MonoBehaviour
 
     public void OpenMenu()
     {
+        GamePaused = false;
+
         if(LevelRef)
         {
             Destroy(LevelRef);
@@ -69,6 +73,7 @@ public class GameManager : MonoBehaviour
 
     public void SetPause(bool IsPause)
     {
+        GamePaused = true;
         pause.SetActive(IsPause);
     }
 

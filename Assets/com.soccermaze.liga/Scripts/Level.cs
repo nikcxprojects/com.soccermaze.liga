@@ -41,7 +41,9 @@ public class Level : MonoBehaviour
             emptyCells.Add(cell);
         }
 
+        startCell.gameObject.AddComponent<StartCell>();
         startCell.GetComponent<SpriteRenderer>().sprite = startSprite;
+
         transform.position += Vector3.down * 15.0f;
     }
 
