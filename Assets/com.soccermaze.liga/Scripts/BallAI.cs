@@ -6,13 +6,19 @@ public class BallAI : MonoBehaviour
     private readonly Vector2[] Directions = { Vector2.up, Vector2.down, Vector2.left, Vector2.right };
 
     private Vector2 Target { get; set; }
-    [SerializeField] float speed;
-    [SerializeField] float deistance;
+    private const float force = 2;
+
+    private Rigidbody2D Rigidbody { get; set; }
+
+    private void Start()
+    {
+        Rigidbody = GetComponent<Rigidbody2D>();
+    }
 
     public void SetBallPosition(Vector2 position)
     {
-        Target = transform.position;
-        Debug.Log(Target);
+        transform.position = position;
+        Target = position;
     }
 
     public void StartTravelling()
@@ -20,38 +26,46 @@ public class BallAI : MonoBehaviour
         StartCoroutine(nameof(Travelling));
     }
 
+    private void OnCollisionEnter2D(Collision2D collision)
+    {
+        if(collision.collider.GetComponent<Goal>() != null)
+        {
+            StopCoroutine(nameof(Travelling));
+        }
+    }
+
     private IEnumerator Travelling()
     { 
         while(true)
         {
-            //for (int i = 0; i < Directions.Length; i++)
-            //{
-            //    RaycastHit2D hit = Physics2D.Raycast(transform.position, Directions[i], deistance);
-            //    if (hit.collider != null)
-            //    {
-            //        if (hit.collider.GetType() == typeof(EdgeCollider2D))
-            //        {
-            //            continue;
-            //        }
+            bool find = false;
 
-            //        if (hit.collider.isTrigger)
-            //        {
-            //            hit.collider.gameObject.layer = 2;
-            //            Target = hit.transform.position;
-            //        }
-            //    }
-
-            //    if (Target != (Vector2)transform.position)
-            //    {
-            //        break;
-            //    }
-            //}
-
-            while ((Vector2)transform.position != Target)
+            for (int i = 0; i < Directions.Length; i++)
             {
-                transform.position = Vector2.MoveTowards(transform.position, Target, speed * Time.deltaTime);
-                yield return null;
+                RaycastHit2D hit = Physics2D.Raycast(transform.position, Directions[i], 0.7f);
+                if (hit.collider != null)
+                {
+                    if (hit.collider.GetType() == typeof(EdgeCollider2D))
+                    {
+                        continue;
+                    }
+
+                    if (hit.collider.isTrigger)
+                    {
+                        hit.collider.gameObject.layer = 2;
+                        Target = hit.transform.position;
+                        find = true;
+                    }
+                }
+
+                if (find)
+                {
+                    break;
+                }
             }
+
+            Vector2 direction = (Target - (Vector2)transform.position).normalized;
+            Rigidbody.AddForce(direction * force, ForceMode2D.Force);
 
             yield return null;
         }
