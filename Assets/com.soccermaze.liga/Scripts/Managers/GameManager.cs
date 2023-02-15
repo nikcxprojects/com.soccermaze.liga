@@ -3,7 +3,10 @@ using UnityEngine.UI;
 
 public class GameManager : MonoBehaviour
 {
+    public static GameManager Instance { get => FindObjectOfType<GameManager>(); }
+
     private GameObject LevelRef { get; set; }
+    private GameObject worldElementRef;
 
     [SerializeField] GameObject background;
 
@@ -17,6 +20,9 @@ public class GameManager : MonoBehaviour
     [SerializeField] GameObject pause;
     [SerializeField] GameObject win;
     [SerializeField] GameObject lose;
+
+    [Space(10)]
+    [SerializeField] GameObject rotateBtn;
 
     private void Start()
     {
@@ -63,5 +69,21 @@ public class GameManager : MonoBehaviour
     public void SetPause(bool IsPause)
     {
         pause.SetActive(IsPause);
+    }
+
+    public void SetWorldElement(GameObject _worldElementRef)
+    {
+        worldElementRef = _worldElementRef;
+        rotateBtn.SetActive(true);
+    }
+
+    public void RotateWorldElement()
+    {
+        if(!worldElementRef)
+        {
+            return;
+        }
+
+        worldElementRef.transform.Rotate(0, 0, 90);
     }
 }
