@@ -91,13 +91,15 @@ public class GameManager : MonoBehaviour
 
     public void DeleteWorldElement()
     {
-        if(worldElementRef)
+        if(!worldElementRef)
         {
             return;
         }
 
-        Destroy(worldElementRef);
-    }
+        FindObjectOfType<RotateBtn>().SetActive = false;
+        FindObjectOfType<DeleteBtn>().SetActive = false;
 
-    public void ClearWorldElementRef() => worldElementRef = null;
+        Destroy(worldElementRef);
+        worldElementRef = null;
+    }
 }

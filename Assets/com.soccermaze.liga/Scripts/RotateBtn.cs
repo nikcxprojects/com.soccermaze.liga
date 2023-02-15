@@ -19,7 +19,6 @@ public class RotateBtn : MonoBehaviour, IPointerExitHandler
 
     public void OnPointerExit(PointerEventData eventData)
     {
-        GameManager.Instance.ClearWorldElementRef();
         SetActive = false;
     }
 }
