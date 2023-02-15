@@ -1,18 +1,19 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.EventSystems;
 
 public class Element : MonoBehaviour, IBeginDragHandler, IEndDragHandler, IDragHandler
 {
+    [SerializeField] GameObject element;
+
     public void OnBeginDrag(PointerEventData eventData)
     {
-        Debug.Log("start");
+        Level.Instance.InstElement(element);
     }
 
     public void OnDrag(PointerEventData eventData)
     {
-        Debug.Log("drag");
+        Vector2 position = Camera.main.ScreenToViewportPoint(eventData.position);
+        Level.Instance.UpdateElementPosition(position);
     }
 
     public void OnEndDrag(PointerEventData eventData)
