@@ -2847,8 +2847,8 @@ MonoBehaviour:
       m_Calls:
       - m_Target: {fileID: 1839094550}
         m_TargetAssemblyTypeName: GameManager, Assembly-CSharp
-        m_MethodName: SetPause
-        m_Mode: 6
+        m_MethodName: OpenGame
+        m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
           m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
@@ -4461,8 +4461,8 @@ MonoBehaviour:
       m_Calls:
       - m_Target: {fileID: 1839094550}
         m_TargetAssemblyTypeName: GameManager, Assembly-CSharp
-        m_MethodName: SetPause
-        m_Mode: 6
+        m_MethodName: OpenGame
+        m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
           m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
@@ -5286,6 +5286,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1177945033}
   - component: {fileID: 1177945034}
+  - component: {fileID: 1177945035}
   m_Layer: 0
   m_Name: elements
   m_TagString: Untagged
@@ -5342,6 +5343,18 @@ MonoBehaviour:
   m_ChildScaleWidth: 0
   m_ChildScaleHeight: 0
   m_ReverseArrangement: 0
+--- !u!114 &1177945035
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1177945032}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1eef2bfa468ee8542aa295abaea5ad88, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &1229198476
 GameObject:
   m_ObjectHideFlags: 0

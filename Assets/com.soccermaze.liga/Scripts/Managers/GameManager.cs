@@ -86,6 +86,7 @@ public class GameManager : MonoBehaviour
     {
         GamePaused = IsPause;
         pause.SetActive(IsPause);
+        BallAI.Sleep = IsPause;
     }
 
     public void SetWorldElement(GameObject _worldElementRef)

@@ -8,7 +8,7 @@ public class BallAI : MonoBehaviour
     private Vector2 Target { get; set; }
     private const float force = 2;
 
-    private Rigidbody2D Rigidbody { get; set; }
+    private static Rigidbody2D Rigidbody { get; set; }
 
     private void Start()
     {
@@ -26,6 +26,11 @@ public class BallAI : MonoBehaviour
         StartCoroutine(nameof(Travelling));
     }
 
+    public static bool Sleep
+    {
+        set => Rigidbody.bodyType = value ? RigidbodyType2D.Static : RigidbodyType2D.Dynamic;
+    }
+
     private void OnCollisionEnter2D(Collision2D collision)
     {
         if(collision.collider.GetComponent<Goal>() != null)
@@ -38,6 +43,11 @@ public class BallAI : MonoBehaviour
     { 
         while(true)
         {
+            if (GameManager.GamePaused)
+            {
+                yield return null;
+            }
+
             bool find = false;
 
             for (int i = 0; i < Directions.Length; i++)
