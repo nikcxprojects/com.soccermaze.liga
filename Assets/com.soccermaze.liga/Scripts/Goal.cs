@@ -6,7 +6,7 @@ public class Goal : MonoBehaviour
     {
         GameManager.Instance.CheckResult(true);
 
-        collision.GetComponent<BallAI>().enabled = false;
+        collision.GetComponent<BallAI>().StopTravelling();
         GetComponent<CapsuleCollider2D>().enabled = false;
     }
 }

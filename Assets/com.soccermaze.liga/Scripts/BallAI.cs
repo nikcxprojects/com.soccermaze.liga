@@ -6,7 +6,7 @@ public class BallAI : MonoBehaviour
     private readonly Vector2[] Directions = { Vector2.up, Vector2.down, Vector2.left, Vector2.right };
 
     private Vector2 Target { get; set; }
-    private const float force = 2;
+    private const float force = 4;
 
     private static Rigidbody2D Rigidbody { get; set; }
 
@@ -31,12 +31,9 @@ public class BallAI : MonoBehaviour
         set => Rigidbody.bodyType = value ? RigidbodyType2D.Static : RigidbodyType2D.Dynamic;
     }
 
-    private void OnCollisionEnter2D(Collision2D collision)
+    public void StopTravelling()
     {
-        if(collision.collider.GetComponent<Goal>() != null)
-        {
-            StopCoroutine(nameof(Travelling));
-        }
+        StopCoroutine(nameof(Travelling));
     }
 
     private IEnumerator Travelling()
