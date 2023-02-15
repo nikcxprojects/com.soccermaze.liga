@@ -27,9 +27,26 @@ public class GameManager : MonoBehaviour
     [SerializeField] RotateBtn rotateBtn;
     [SerializeField] DeleteBtn deleteBtn;
 
+    private float timer;
+    [Space(10)]
+    [SerializeField] Text timerText;
+
     private void Start()
     {
         OpenMenu();
+    }
+
+    private void Update()
+    {
+        if(game.activeSelf && !win.activeSelf && !lose.activeSelf && !GamePaused)
+        {
+            timer += Time.deltaTime;
+
+            float min = Mathf.RoundToInt(timer / 60);
+            float sec = Mathf.Round(timer % 60);
+
+            timerText.text = string.Format("{0:00}:{1:00}", min,sec);
+        }
     }
 
     public void OpenLeaders(bool IsOpen)
@@ -46,7 +63,13 @@ public class GameManager : MonoBehaviour
 
     public void OpenGame()
     {
+        timer = 0;
         background.SetActive(false);
+
+        foreach(LevelContainer lc in FindObjectsOfType<LevelContainer>())
+        {
+            lc.ForceUpdate();
+        }
 
         win.SetActive(false);
         lose.SetActive(false);
@@ -114,12 +137,20 @@ public class GameManager : MonoBehaviour
 
     public void CheckResult(bool IsWin)
     {
+        if(SettingsManager.VibraEnbled)
+        {
+            Handheld.Vibrate();
+        }
+
         if(IsWin)
         {
+            SFXManager.Instance.PlayEffect(1);
+            StatsUtility.Level++;
             win.SetActive(true);
         }
         else
         {
+            SFXManager.Instance.PlayEffect(0);
             lose.SetActive(true);
         }
     }

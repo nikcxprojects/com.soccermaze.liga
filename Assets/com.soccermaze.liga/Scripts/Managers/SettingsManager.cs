@@ -23,13 +23,13 @@ public class SettingsManager : MonoBehaviour
 
     public void SetMusicStatus(bool IsEnable)
     {
-        music.mute = IsEnable;
+        music.mute = !IsEnable;
         musicText.text = $"{(IsEnable ? "ON" : "OFF")}";
     }
 
     public void SetSoundsStatus(bool IsEnable)
     {
-        sounds.mute = IsEnable;
+        sounds.mute = !IsEnable;
         soundsText.text = $"{(IsEnable ? "ON" : "OFF")}";
     }
 

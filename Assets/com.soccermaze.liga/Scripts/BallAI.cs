@@ -39,7 +39,7 @@ public class BallAI : MonoBehaviour
     private IEnumerator Travelling()
     {
         float et = 0.0f;
-        float waitTime = 2.5f;
+        float waitTime = 3.0f;
 
         while(true)
         {
