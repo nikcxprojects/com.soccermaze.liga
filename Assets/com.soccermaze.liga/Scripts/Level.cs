@@ -66,6 +66,20 @@ public class Level : MonoBehaviour
         return mousePosition;
     }
 
+    private bool IsEmptyCell()
+    {
+        foreach(Transform t in elementParent)
+        {
+            float dist = Vector2.Distance(t.position, elementRef.transform.position);
+            if(dist < 0.5f && t.gameObject != elementRef)
+            {
+                return false;
+            }
+        }
+
+        return true;
+    }
+
     public void InstElement(GameObject elementPrefab)
     {
         elementRef = Instantiate(elementPrefab, elementParent);
@@ -89,7 +103,7 @@ public class Level : MonoBehaviour
             return;
         }
 
-        if(!IsSet)
+        if(!IsSet || !IsEmptyCell())
         {
             Destroy(elementRef);
         }

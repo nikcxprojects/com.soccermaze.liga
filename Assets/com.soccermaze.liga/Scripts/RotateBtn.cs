@@ -19,6 +19,7 @@ public class RotateBtn : MonoBehaviour, IPointerExitHandler
 
     public void OnPointerExit(PointerEventData eventData)
     {
+        FindObjectOfType<DeleteBtn>().SetActive = false;
         SetActive = false;
     }
 }
