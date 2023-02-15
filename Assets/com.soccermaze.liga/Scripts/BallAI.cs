@@ -2,11 +2,11 @@ using UnityEngine;
 
 public class BallAI : MonoBehaviour
 {
+    //private Vector2[] Directions = { Vector2.down, Vector2.up, Vector2.left, Vector2.right };
+    private Vector2[] Directions = { Vector2.down };
     private bool IsTraveling { get; set; }
 
     private Vector2 Target { get; set; }
-
-    [SerializeField] float rayLenght;
     [SerializeField] float speed;
 
     private void Start()
@@ -21,11 +21,23 @@ public class BallAI : MonoBehaviour
             return;
         }
 
-        RaycastHit2D hit = Physics2D.Raycast(Vector2.down, transform.position, rayLenght);
-        if(hit.collider != null)
+        //RaycastHit2D hit = Physics2D.Raycast(Vector2.down, transform.position, rayLenght);
+        //if(hit.collider != null)
+        //{
+        //    Target = hit.transform.position;
+        //    Debug.Log(hit.collider.name);
+        //}
+
+        for(int i = 0; i < Directions.Length; i++)
         {
-            Target = hit.transform.position;
-            Debug.Log(hit.collider.name);
+            RaycastHit2D hit = Physics2D.Raycast(Directions[i], transform.position, Mathf.Infinity);
+            if (hit.collider != null)
+            {
+                Target = hit.transform.position;
+                //hit.collider.enabled = false;
+
+                Debug.Log(hit.collider.name);
+            }
         }
 
         transform.position = Vector2.MoveTowards(transform.position, Target, speed * Time.deltaTime);
