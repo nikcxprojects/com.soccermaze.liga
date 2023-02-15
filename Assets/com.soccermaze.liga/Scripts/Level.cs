@@ -5,9 +5,12 @@ public class Level : MonoBehaviour
 {
     public static Level Instance { get => FindObjectOfType<Level>(); }
 
+    private bool IsSet;
+
     private static float smoothTime = 0.1f;
     private Vector2 velocity = Vector2.zero;
 
+    private Camera _camera;
     private GameObject elementRef;
 
     private List<Transform> emptyCells;
@@ -17,6 +20,11 @@ public class Level : MonoBehaviour
     [Space(10)]
     [SerializeField] Sprite startSprite;
     [SerializeField] SpriteRenderer[] startPoints;
+
+    private void Awake()
+    {
+        _camera = Camera.main;
+    }
 
     private void Start()
     {
@@ -42,6 +50,22 @@ public class Level : MonoBehaviour
         transform.position = Vector2.SmoothDamp(transform.position, Vector2.zero, ref velocity, smoothTime);
     }
 
+    private Vector2 GetNearestCellPosition(Vector2 mousePosition)
+    {
+        foreach(Transform t in emptyCells)
+        {
+            float dist = Vector2.Distance(t.position, mousePosition);
+            if(dist < 0.25f)
+            {
+                IsSet = true;
+                return t.position;
+            }
+        }
+
+        IsSet = false;
+        return mousePosition;
+    }
+
     public void InstElement(GameObject elementPrefab)
     {
         elementRef = Instantiate(elementPrefab, elementParent);
@@ -54,6 +78,22 @@ public class Level : MonoBehaviour
             return;
         }
 
-        elementRef.transform.position = position;
+        Vector2 mousePosition = (Vector2)_camera.ScreenToWorldPoint(Input.mousePosition);
+        elementRef.transform.localPosition = GetNearestCellPosition(mousePosition);
+    }
+
+    public void SetElement()
+    {
+        if (!elementRef)
+        {
+            return;
+        }
+
+        if(!IsSet)
+        {
+            Destroy(elementRef);
+        }
+
+        elementRef = null;
     }
 }

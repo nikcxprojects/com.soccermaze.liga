@@ -18,6 +18,6 @@ public class Element : MonoBehaviour, IBeginDragHandler, IEndDragHandler, IDragH
 
     public void OnEndDrag(PointerEventData eventData)
     {
-        Debug.Log("end");
+        Level.Instance.SetElement();
     }
 }
