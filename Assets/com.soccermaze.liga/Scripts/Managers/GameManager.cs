@@ -3,6 +3,8 @@ using UnityEngine.UI;
 
 public class GameManager : MonoBehaviour
 {
+    private GameObject LevelRef { get; set; }
+
     [SerializeField] GameObject background;
 
     [Space(10)]
@@ -39,10 +41,17 @@ public class GameManager : MonoBehaviour
 
         menu.SetActive(false);
         game.SetActive(true);
+
+        LevelRef = Instantiate(Resources.Load<GameObject>("level"), GameObject.Find("Environment").transform);
     }
 
     public void OpenMenu()
     {
+        if(LevelRef)
+        {
+            Destroy(LevelRef);
+        }
+
         background.SetActive(true);
 
         game.SetActive(false);
